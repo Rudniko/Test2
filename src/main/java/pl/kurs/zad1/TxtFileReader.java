@@ -30,52 +30,42 @@ public class TxtFileReader {
         return linesOfText;
     }
 
-    public List<Mother> getMothersFromFile() {
+    public List<Mother> getMothersInfo() {
         List<String> linesOfText = getLinesFromText(filePath);
         List<Mother> mothers = new ArrayList<>();
 
         for (String line : linesOfText) {
             String[] elements = line.split(" ");
-
-            int id = Integer.parseInt(elements[0]);
-            String name = elements[1];
-            int age = Integer.parseInt(elements[2]);
-            Mother mother = new Mother(id, name, age);
+            Mother mother = new Mother(Integer.parseInt(elements[0]), elements[1], Integer.parseInt(elements[2]));
             mothers.add(mother);
         }
         return mothers;
     }
 
-    public List<Baby> getBabiesFromFileAndTheirMothers(List<Mother> mothers) {
+    public List<Baby> getBabiesAndTheirMotherInfo(List<Mother> mothers) {
         List<String> linesOfText = getLinesFromText(filePath);
         List<Baby> babies = new ArrayList<>();
 
         for (String line : linesOfText) {
             String[] elements = line.split(" ");
-            try {
-                int id = Integer.parseInt(elements[0]);
-                char gender = elements[1].charAt(0);
-                String name = elements[2];
-                Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(elements[3]);
-                double weightG = Double.parseDouble(elements[4]);
-                double heightCm = Double.parseDouble(elements[5]);
-                int motherId = Integer.parseInt(elements[6]);
-                Mother mother = null;
 
-                for (Mother m : mothers) {
-                    if (m.getId() == motherId) {
-                        mother = m;
-                        break;
-                    }
+//                Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(elements[3]);
+            int motherId = Integer.parseInt(elements[6]);
+            Mother mother = null;
+
+            for (Mother m : mothers) {
+                if (m.getId() == motherId) {
+                    mother = m;
+                    break;
                 }
-                if (mother != null) {
-                    Baby baby = new Baby(id, gender, name, birthDate, weightG, heightCm, mother);
-                    babies.add(baby);
-                    mother.addBaby(baby);
-                }
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
             }
+            if (mother != null) {
+                Baby baby = new Baby(Integer.parseInt(elements[0]), elements[1].charAt(0), elements[2], elements[3],
+                        Double.parseDouble(elements[4]), Double.parseDouble(elements[5]), mother);
+                babies.add(baby);
+                mother.addBaby(baby);
+            }
+
         }
         return babies;
     }

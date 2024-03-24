@@ -1,5 +1,7 @@
 package pl.kurs.zad1;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,8 +11,8 @@ public class Runner {
     public static void main(String[] args) {
         TxtFileReader file1 = new TxtFileReader("src/main/java/pl/kurs/zad1/mamy.txt");
         TxtFileReader file2 = new TxtFileReader("src/main/java/pl/kurs/zad1/noworodki.txt");
-        List<Mother> mothers = file1.getMothersFromFile();
-        List<Baby> babies = file2.getBabiesFromFileAndTheirMothers(mothers);
+        List<Mother> mothers = file1.getMothersInfo();
+        List<Baby> babies = file2.getBabiesAndTheirMotherInfo(mothers);
 
         showNameAndHeightFromTallestBabies(babies);
         System.out.println("-----------");
@@ -24,6 +26,7 @@ public class Runner {
 
 
     }
+
     static void showNameAndHeightFromTallestBabies(List<Baby> babies) {
         Baby tallestBoy = babies.get(0);
         Baby tallestGirl = babies.get(0);
@@ -39,22 +42,28 @@ public class Runner {
         System.out.println("Najwyższy chłopiec ma na imię: " + tallestBoy.getName() + " i ma " + tallestBoy.getHeightCm() + " cm wzrostu");
         System.out.println("Najwyższa dziewczynka ma na imię: " + tallestGirl.getName() + " i ma " + tallestGirl.getHeightCm() + " cm wzrostu");
     }
+
     static int[] showBirthsInWeekDays(List<Baby> babies) {
         int[] birthsInWeekDays = new int[7];
         for (Baby b : babies) {
-            Calendar calendar = GregorianCalendar.getInstance();
-            calendar.setTime(b.getBirthDate());
+            try {
+                Date sdf = new SimpleDateFormat("yyyy-MM-dd").parse(b.getBirthDate());
+                Calendar calendar = GregorianCalendar.getInstance();
+                calendar.setTime(sdf);
+                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                dayOfWeek -= 2;
 
-            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-            dayOfWeek -= 2;
-
-            if (dayOfWeek < 0) {
-                dayOfWeek += 7;
+                if (dayOfWeek < 0) {
+                    dayOfWeek += 7;
+                }
+                birthsInWeekDays[dayOfWeek]++;
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
             }
-            birthsInWeekDays[dayOfWeek]++;
         }
         return birthsInWeekDays;
     }
+
     static void showDayOfWeekWithMostBirths(List<Baby> babies) {
         int[] birthsInWeekDays = showBirthsInWeekDays(babies);
         int mostBirths = 0;
@@ -70,6 +79,7 @@ public class Runner {
 
 
     }
+
     static void showNamesOfYoungMothersWhoGaveBirthToAHeavyChild(List<Mother> mothers) {
         StringBuilder motherNames = new StringBuilder();
         for (Mother mother : mothers) {
@@ -83,12 +93,14 @@ public class Runner {
         System.out.println("Kobiety, które urodziły dzieci o wadze powyżej 4000g mając mniej niż 25 lat to: " + motherNames);
 
     }
+
     static boolean doesDaughterInheritedMotherName(Baby baby) {
         if (!(Baby.isBoy(baby))) {
             return baby.getName().equals(baby.getMother().getName());
         }
         return false;
     }
+
     static void printDaughterInheritedNamesAndBirthDates(List<Baby> babies) {
         StringBuilder babiesNames = new StringBuilder();
         for (Baby b : babies) {
@@ -98,11 +110,12 @@ public class Runner {
         }
         System.out.println("Dziewczynki, które odziedziczyły imię po matce oraz ich daty urodzenia to: " + babiesNames);
     }
+
     static void showMothersWithTwins(List<Mother> mother) {
         StringBuilder motherWithTwins = new StringBuilder();
         for (Mother m : mother) {
             List<Baby> babies = m.getBabies();
-            Date birthDate = babies.get(0).getBirthDate();
+            String birthDate = babies.get(0).getBirthDate();
             for (int i = 1; i < babies.size(); i++) {
                 if (babies.get(i).getBirthDate().equals(birthDate)) {
                     motherWithTwins.append(m.getName()).append(", ");

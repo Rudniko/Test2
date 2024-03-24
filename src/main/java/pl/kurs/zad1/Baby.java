@@ -6,12 +6,12 @@ public class Baby {
     private int id;
     private final char gender;
     private String name;
-    private final Date birthDate;
+    private String birthDate;
     private double weightG;
     private double heightCm;
     private final Mother mother;
 
-    public Baby(int id, char gender, String name, Date birthDate, double weightG, double heightCm, Mother mother) {
+    public Baby(int id, char gender, String name, String birthDate, double weightG, double heightCm, Mother mother) {
         this.id = id;
         this.gender = gender;
         this.name = name;
@@ -21,7 +21,7 @@ public class Baby {
         this.mother = mother;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
