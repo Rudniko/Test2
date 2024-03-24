@@ -1,7 +1,5 @@
 package pl.kurs.zad1;
 
-import java.util.*;
-
 public class Baby {
     private int id;
     private final char gender;
@@ -40,6 +38,7 @@ public class Baby {
     public static boolean isBoy(Baby baby) {
         return baby.gender == 's';
     }
+
     public static boolean isBabyOver4000Grams(Baby baby) {
         return baby.weightG > 4000;
     }

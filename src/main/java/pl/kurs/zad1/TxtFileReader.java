@@ -2,20 +2,11 @@ package pl.kurs.zad1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class TxtFileReader {
-    private final String filePath;
-
-    public TxtFileReader(String filePath) {
-        this.filePath = filePath;
-    }
-
-    private List<String> getLinesFromText(String filePath) {
+public abstract class TxtFileReader {
+    private static List<String> getLinesFromText(String filePath) {
         List<String> linesOfText = new ArrayList<>();
         try (
                 BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filePath))
@@ -30,8 +21,8 @@ public class TxtFileReader {
         return linesOfText;
     }
 
-    public List<Mother> getMothersInfo() {
-        List<String> linesOfText = getLinesFromText(filePath);
+    public static List<Mother> getMothersInfo() {
+        List<String> linesOfText = getLinesFromText("src/main/java/pl/kurs/zad1/mamy.txt");
         List<Mother> mothers = new ArrayList<>();
 
         for (String line : linesOfText) {
@@ -42,8 +33,8 @@ public class TxtFileReader {
         return mothers;
     }
 
-    public List<Baby> getBabiesAndTheirMotherInfo(List<Mother> mothers) {
-        List<String> linesOfText = getLinesFromText(filePath);
+    public static List<Baby> getBabiesAndTheirMotherInfo(List<Mother> mothers) {
+        List<String> linesOfText = getLinesFromText("src/main/java/pl/kurs/zad1/noworodki.txt");
         List<Baby> babies = new ArrayList<>();
 
         for (String line : linesOfText) {

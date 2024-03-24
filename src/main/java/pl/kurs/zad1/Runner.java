@@ -9,10 +9,9 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-        TxtFileReader file1 = new TxtFileReader("src/main/java/pl/kurs/zad1/mamy.txt");
-        TxtFileReader file2 = new TxtFileReader("src/main/java/pl/kurs/zad1/noworodki.txt");
-        List<Mother> mothers = file1.getMothersInfo();
-        List<Baby> babies = file2.getBabiesAndTheirMotherInfo(mothers);
+
+        List<Mother> mothers = TxtFileReader.getMothersInfo();
+        List<Baby> babies = TxtFileReader.getBabiesAndTheirMotherInfo(mothers);
 
         showNameAndHeightFromTallestBabies(babies);
         System.out.println("-----------");
@@ -27,6 +26,7 @@ public class Runner {
 
     }
 
+    //a)
     static void showNameAndHeightFromTallestBabies(List<Baby> babies) {
         Baby tallestBoy = babies.get(0);
         Baby tallestGirl = babies.get(0);
@@ -41,6 +41,23 @@ public class Runner {
         }
         System.out.println("Najwyższy chłopiec ma na imię: " + tallestBoy.getName() + " i ma " + tallestBoy.getHeightCm() + " cm wzrostu");
         System.out.println("Najwyższa dziewczynka ma na imię: " + tallestGirl.getName() + " i ma " + tallestGirl.getHeightCm() + " cm wzrostu");
+    }
+
+    //b)
+    static void showDayOfWeekWithMostBirths(List<Baby> babies) {
+        int[] birthsInWeekDays = showBirthsInWeekDays(babies);
+        int mostBirths = 0;
+        int dayWithMostBirths = 0;
+        for (int i = 0; i < birthsInWeekDays.length; i++) {
+            if (birthsInWeekDays[i] > mostBirths) {
+                mostBirths = birthsInWeekDays[i];
+                dayWithMostBirths = i;
+            }
+        }
+        String[] weekDays = new String[]{"poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"};
+        System.out.println("Dzień z największą liczbą urodzeń to " + weekDays[dayWithMostBirths] + ", liczba urodzonych dzieci to: " + mostBirths);
+
+
     }
 
     static int[] showBirthsInWeekDays(List<Baby> babies) {
@@ -64,22 +81,7 @@ public class Runner {
         return birthsInWeekDays;
     }
 
-    static void showDayOfWeekWithMostBirths(List<Baby> babies) {
-        int[] birthsInWeekDays = showBirthsInWeekDays(babies);
-        int mostBirths = 0;
-        int dayWithMostBirths = 0;
-        for (int i = 0; i < birthsInWeekDays.length; i++) {
-            if (birthsInWeekDays[i] > mostBirths) {
-                mostBirths = birthsInWeekDays[i];
-                dayWithMostBirths = i;
-            }
-        }
-        String[] weekDays = new String[]{"poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"};
-        System.out.println("Dzień z największą liczbą urodzeń to " + weekDays[dayWithMostBirths] + ", liczba urodzonych dzieci to: " + mostBirths);
-
-
-    }
-
+    //c)
     static void showNamesOfYoungMothersWhoGaveBirthToAHeavyChild(List<Mother> mothers) {
         StringBuilder motherNames = new StringBuilder();
         for (Mother mother : mothers) {
@@ -94,6 +96,7 @@ public class Runner {
 
     }
 
+    //d)
     static boolean doesDaughterInheritedMotherName(Baby baby) {
         if (!(Baby.isBoy(baby))) {
             return baby.getName().equals(baby.getMother().getName());
@@ -111,6 +114,7 @@ public class Runner {
         System.out.println("Dziewczynki, które odziedziczyły imię po matce oraz ich daty urodzenia to: " + babiesNames);
     }
 
+    //e)
     static void showMothersWithTwins(List<Mother> mother) {
         StringBuilder motherWithTwins = new StringBuilder();
         for (Mother m : mother) {
@@ -118,7 +122,7 @@ public class Runner {
             String birthDate = babies.get(0).getBirthDate();
             for (int i = 1; i < babies.size(); i++) {
                 if (babies.get(i).getBirthDate().equals(birthDate)) {
-                    motherWithTwins.append(m.getName()).append(", ");
+                    motherWithTwins.append(m.getName()).append(" id:").append(m.getId()).append(", ");
                 }
             }
 
