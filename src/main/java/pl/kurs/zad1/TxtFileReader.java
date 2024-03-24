@@ -48,11 +48,9 @@ public class TxtFileReader {
 
         for (String line : linesOfText) {
             String[] elements = line.split(" ");
-
-//                Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(elements[3]);
             int motherId = Integer.parseInt(elements[6]);
-            Mother mother = null;
 
+            Mother mother = null;
             for (Mother m : mothers) {
                 if (m.getId() == motherId) {
                     mother = m;
