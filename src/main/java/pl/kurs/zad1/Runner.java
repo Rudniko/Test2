@@ -19,7 +19,7 @@ public class Runner {
         System.out.println("-----------");
         showNamesOfYoungMothersWhoGaveBirthToAHeavyChild(mothers);
         System.out.println("-----------");
-        printDaughterInheritedNamesAndBirthDates(babies);
+        printDaughterInheritedNamesAndTheirBirthDates(babies);
         System.out.println("-----------");
         showMothersWithTwins(mothers);
 
@@ -104,11 +104,11 @@ public class Runner {
         return false;
     }
 
-    static void printDaughterInheritedNamesAndBirthDates(List<Baby> babies) {
+    static void printDaughterInheritedNamesAndTheirBirthDates(List<Baby> babies) {
         StringBuilder babiesNames = new StringBuilder();
         for (Baby b : babies) {
             if (doesDaughterInheritedMotherName(b)) {
-                babiesNames.append(b.getName()).append(", urodzona ").append(b.getBirthDate()).append(", ");
+                babiesNames.append(b.getName()).append(" urodzona ").append(b.getBirthDate()).append(", ");
             }
         }
         System.out.println("Dziewczynki, które odziedziczyły imię po matce oraz ich daty urodzenia to: " + babiesNames);
