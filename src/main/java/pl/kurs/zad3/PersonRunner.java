@@ -39,6 +39,6 @@ public class PersonRunner {
 
             }
         }
-        System.out.println("Person with the highest Income is " + personWithHighestIncome);
+        System.out.println("Osoba z najwiekszym dochodem to " + personWithHighestIncome);
     }
 }
