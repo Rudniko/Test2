@@ -1,15 +1,13 @@
-package pl.kurs.zad1;
+package pl.kurs.zad1.models;
 
-
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mother {
     private int id;
     private String name;
     private int age;
     private List<Baby> babies;
-
 
     public Mother(int id, String name, int age) {
         this.id = id;
@@ -22,20 +20,20 @@ public class Mother {
         return id;
     }
 
-    public void addBaby(Baby baby) {
-        babies.add(baby);
+    public String getName() {
+        return name;
     }
 
     public int getAge() {
         return age;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public List<Baby> getBabies() {
         return babies;
     }
-}
 
+    public void addBaby(Baby baby) {
+        babies.add(baby);
+    }
+
+}
