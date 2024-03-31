@@ -12,24 +12,26 @@ public class PersonRunner {
 
         Person[] people = new Person[]{student1, student2, student3, employee1, employee2, employee3};
 
-        findPersonWithHighestIncome(people);
-        countWomen(people);
+        Person personWithHighestIncome = findPersonWithHighestIncome(people);
+        System.out.println("Osoba z największym dochodem to " + personWithHighestIncome);
+
+        int numberOfWomen = countWomen(people);
+        System.out.println("Ilość kobiet w tablity: " + numberOfWomen);
 
 
     }
 
-    static void countWomen(Person[] people) {
+    static int countWomen(Person[] people) {
         int womenCount = 0;
         for (Person p : people) {
-            if (p != null && Person.getPlec(p).equals(Gender.WOMAN)) {
+            if (p != null && p.getPlec().equals(Gender.WOMAN)) {
                 womenCount++;
             }
         }
-        System.out.println("Liczba kobiet w tablicy to: " + womenCount);
-
+        return womenCount;
     }
 
-    static void findPersonWithHighestIncome(Person[] people) {
+    static Person findPersonWithHighestIncome(Person[] people) {
         Person personWithHighestIncome = null;
         double highestIncome = 0;
         for (Person p : people) {
@@ -39,6 +41,6 @@ public class PersonRunner {
 
             }
         }
-        System.out.println("Osoba z najwiekszym dochodem to " + personWithHighestIncome);
+        return personWithHighestIncome;
     }
 }
