@@ -9,16 +9,23 @@ public class FiguryRunner {
         for (Figura f : figury) {
             System.out.println(f);
         }
-        znajdzFigureZNajwiekszymObwodem(figury);
-        znadzFigureZNajwiekszymPolem(figury);
+        Figura figuraZNajwiekszymObwodem = znajdzFigureZNajwiekszymObwodem(figury);
+        System.out.println("Figura z nawiększym obwodem to: " + figuraZNajwiekszymObwodem);
+
+        Figura figuraZNajwiekszymPolem = znadzFigureZNajwiekszymPolem(figury);
+        System.out.println("Figura z największym polem to: " + figuraZNajwiekszymPolem);
+
+
         System.out.println(figury.contains(new Kwadrat(10)));
+
+
 
         Kolo koloZNumer0 = new Kolo(1);
         Kolo koloZNumKolejnym = Figura.stworzKolo(1);
 
     }
 
-    static void znajdzFigureZNajwiekszymObwodem(List<Figura> figury) {
+    static Figura znajdzFigureZNajwiekszymObwodem(List<Figura> figury) {
         Figura figuraZNajwiekszymObwodem = null;
         double najwiekszyObwod = 0;
         for (Figura f : figury) {
@@ -27,10 +34,10 @@ public class FiguryRunner {
                 figuraZNajwiekszymObwodem = f;
             }
         }
-        System.out.println("Figura z największym obwodem to " + figuraZNajwiekszymObwodem);
+        return figuraZNajwiekszymObwodem;
     }
 
-    static void znadzFigureZNajwiekszymPolem(List<Figura> figury) {
+    static Figura znadzFigureZNajwiekszymPolem(List<Figura> figury) {
         Figura figuraZNajwiekszymPolem = null;
         double najwiekszePole = 0;
         for (Figura f : figury) {
@@ -39,7 +46,7 @@ public class FiguryRunner {
                 figuraZNajwiekszymPolem = f;
             }
         }
-        System.out.println("Figura z największym polem to " + figuraZNajwiekszymPolem);
+        return figuraZNajwiekszymPolem;
     }
 
 }
