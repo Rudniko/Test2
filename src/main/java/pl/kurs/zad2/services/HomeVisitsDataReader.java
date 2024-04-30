@@ -16,7 +16,7 @@ public class HomeVisitsDataReader {
     public List<HomeVisit> getHomeVisitListFromFile(String filePath, List<Doctor> doctorList, List<Patient> patientList) {
         File file = new File(filePath);
         if (!file.exists()) {
-            throw new RuntimeException("Nie instnieje plik do oczytu o takiej nazwie!");
+            throw new RuntimeException("Nie instnieje plik do odczytu o takiej nazwie!");
         }
 
         List<HomeVisit> homeVisits = new ArrayList<>();

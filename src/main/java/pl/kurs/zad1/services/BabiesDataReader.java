@@ -17,7 +17,7 @@ public class BabiesDataReader {
 
         File file = new File(filePath);
         if (!file.exists()) {
-            throw new RuntimeException("Nie instnieje plik do oczytu o takiej nazwie!");
+            throw new RuntimeException("Nie instnieje plik do odczytu o takiej nazwie!");
         }
 
         List<Baby> babies = new ArrayList<>();

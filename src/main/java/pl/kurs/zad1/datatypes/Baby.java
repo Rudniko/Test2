@@ -47,4 +47,14 @@ public class Baby {
         return mother;
     }
 
+    @Override
+    public String toString() {
+        return "Baby{" +
+                "gender=" + gender +
+                ", name='" + name + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", weight=" + weight +
+                ", height=" + height +
+                '}';
+    }
 }

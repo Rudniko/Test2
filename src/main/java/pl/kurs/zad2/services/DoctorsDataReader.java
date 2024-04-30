@@ -15,7 +15,7 @@ public class DoctorsDataReader {
     public List<Doctor> getDoctorListFromFile(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
-            throw new RuntimeException("Nie instnieje plik do oczytu o takiej nazwie!");
+            throw new RuntimeException("Nie instnieje plik do odczytu o takiej nazwie!");
         }
 
         List<Doctor> doctors = new ArrayList<>();
